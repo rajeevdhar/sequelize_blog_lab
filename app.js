@@ -11,7 +11,7 @@ app.get("/", function (req, res) {
 });
 
 app.get("/posts", function (req, res) {
-  db.Post.findAll().done(function (err, allPosts) {
+  db.Post.findAll({include: [db.Author]}).done(function (err, allPosts) {
     res.render("posts/index.ejs", {posts: allPosts});
   });
 });

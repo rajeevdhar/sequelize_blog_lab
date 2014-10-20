@@ -5,5 +5,12 @@
   </head>
   <body>
     <h1>Blog</h1>
+      <% posts.forEach(function (post) { %>
+      <div>
+        <h2><%= post.title %></h2>
+        <p>by: <%= post.Author ? post.Author.name : "Anonymous" %></p>
+        <p><%= post.content %></p>
+      </div>
+      <% }) %>
   </body>
 </html>
