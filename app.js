@@ -31,6 +31,18 @@ app.post("/posts", function (req, res) {
   });
 });
 
+app.get("/authors/:id", function (req, res) {
+  var id = req.params.id;
+  db.Author.find(id).done(function (err, author) {
+    author.getPosts().done(function (err, posts) {
+      res.render("authors/show.ejs", {
+        author: author,
+        posts: posts
+      });
+    });
+  });
+});
+
 app.listen(3000);
 
 // db.Author.create({name: "Tim"});
