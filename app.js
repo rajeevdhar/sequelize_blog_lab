@@ -25,8 +25,9 @@ app.post("/posts", function (req, res) {
     defaults: authorParams
   }).spread(function(author, created) {
     db.Post.create(postParams).done(function(err, post) {
-      author.addPost(post);
-      res.redirect("/posts");
+      author.addPost(post).done(function (err) {
+        res.redirect("/posts");
+      });
     });
   });
 });
