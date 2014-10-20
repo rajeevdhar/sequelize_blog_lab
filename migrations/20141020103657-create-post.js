@@ -14,7 +14,7 @@ module.exports = {
       content: {
         type: DataTypes.TEXT
       },
-      authorId: {
+      AuthorId: {
         type: DataTypes.INTEGER
       },
       createdAt: {
