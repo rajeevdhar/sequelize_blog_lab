@@ -1,4 +1,23 @@
+var express = require("express");
 var db = require("./models/index.js");
+
+var app = express();
+
+app.get("/", function (req, res) {
+  res.render("posts/new.ejs");
+});
+
+app.get("/posts", function (req, res) {
+  db.Post.findAll().done(function (err, allPosts) {
+    res.render("posts/index.ejs", {posts: allPosts});
+  });
+});
+
+app.post("/posts", function (req, res) {
+  res.redirect("/posts");
+});
+
+app.listen(3000);
 
 // db.Author.create({name: "Tim"});
 
