@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/wdi-sf-july/sequelize_blog_lab",
   "dependencies": {
+    "body-parser": "^1.9.0",
     "ejs": "^1.0.0",
     "express": "^4.9.8",
     "pg": "^3.6.1",

@@ -1,7 +1,10 @@
 var express = require("express");
+var bodyParser = require("body-parser");
 var db = require("./models/index.js");
 
 var app = express();
+
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/", function (req, res) {
   res.render("posts/new.ejs");
@@ -14,7 +17,18 @@ app.get("/posts", function (req, res) {
 });
 
 app.post("/posts", function (req, res) {
-  res.redirect("/posts");
+  var authorParams = req.body.author;
+  var postParams = req.body.post;
+
+  db.Author.findOrCreate({
+    where: authorParams,
+    defaults: authorParams
+  }).spread(function(author, created) {
+    db.Post.create(postParams).done(function(err, post) {
+      author.addPost(post);
+      res.redirect("/posts");
+    });
+  });
 });
 
 app.listen(3000);
