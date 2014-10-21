@@ -1,0 +1,11 @@
+- git clone git@github.com:wdi-sf-fall/sequelize_blog_lab.git
+- npm init
+- npm install --save express ejs sequelize sequelize-cli pg
+- sqlize init
+- sqlize help
+- sqlize help:model:create
+- sqlize model:create --name Author --attributes name:string
+- sqlize model:create --name Post --attributes title:string,content:text,AuthorId:integer
+- sqlize db:migrate
+- db.Author.hasMany(db.Post)
+- db.Post.belongsTo(db.Author)
