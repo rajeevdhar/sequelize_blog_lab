@@ -23,7 +23,7 @@ app.post("/posts", function (req, res) {
   db.Author.findOrCreate({
     where: authorParams,
     defaults: authorParams
-  }).spread(function(author, created) {
+  }).done(function(err, author, created) {
     db.Post.create(postParams).done(function(err, post) {
       author.addPost(post).done(function (err) {
         res.redirect("/posts");
