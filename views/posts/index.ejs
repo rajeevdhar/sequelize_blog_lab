@@ -15,13 +15,7 @@
         <p>by: Anonymous</p>
         <% } %>
 
-        <% if (post.Tags && post.Tags.length > 0) { %>
-        <p>tags:
-          <% post.Tags.forEach(function (tag) { %>
-          <a href="/tags/<%=tag.name%>"><%= tag.name %></a>
-          <% }) %>
-        <p>
-        <% } %>
+        <% include ../partials/tagList.ejs %>
 
         <p><%= post.content %></p>
       </div>
