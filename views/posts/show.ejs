@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1><%= post.title %></h1>
-    <h3>By: <%= post.Author.name %></h3>
+    <h3>By: <a href="/authors/<%=post.Author.id%>"><%= post.Author.name %></a></h3>
     <% include ../partials/tagList.ejs %>
     <p><%= post.content %></p>
   </body>
