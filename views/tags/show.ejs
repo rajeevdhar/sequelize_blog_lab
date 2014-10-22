@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Show Tag</title>
+  </head>
+  <body>
+    <h1><%= tag.name %></h1>
+    <ul>
+    <% posts.forEach(function (post) { %>
+    <li><%= post.title %></li>
+    <% }) %>
+    </ul>
+  </body>
+</html>
