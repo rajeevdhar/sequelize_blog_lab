@@ -19,17 +19,37 @@ app.get("/posts", function (req, res) {
 app.post("/posts", function (req, res) {
   var authorParams = req.body.author;
   var postParams = req.body.post;
+  var tagParams = req.body.tags;
+
+  var tagArr = tagParams.split(",");
+
+  var createTags = function (post) {
+    if (tagArr.length === 0) {
+      res.redirect("/posts");
+    } else {
+      var tagObj = {name: tagArr.pop()};
+      db.Tag.findOrCreate({
+        where: tagObj,
+        defaults: tagObj
+      }).done(function (err, tag, created) {
+        post.addTag(tag);
+        createTags(post);
+      });
+    }
+  };
+
+  var createPost = function(err, author, created) {
+    db.Post.create(postParams).done(function(err, post) {
+      author.addPost(post).done(function () {
+        createTags(post);
+      });
+    });
+  };
 
   db.Author.findOrCreate({
     where: authorParams,
     defaults: authorParams
-  }).done(function(err, author, created) {
-    db.Post.create(postParams).done(function(err, post) {
-      author.addPost(post).done(function (err) {
-        res.redirect("/posts");
-      });
-    });
-  });
+  }).done(createPost);
 });
 
 app.get("/authors/:id", function (req, res) {
