@@ -67,7 +67,7 @@ app.get("/authors/:id", function (req, res) {
 app.get("/tags/:name", function (req, res) {
   var tagName = req.params.name;
   db.Tag.find({where: {name: tagName}}).done(function (err, tag) {
-    tag.getPosts().done(function (err, posts) {
+    tag.getPosts({include: [db.Author]}).done(function (err, posts) {
       res.render("tags/show.ejs", {tag:tag, posts:posts});
     });
   });
