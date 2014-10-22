@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Show Post</title>
+  </head>
+  <body>
+    <h1><%= post.title %></h1>
+    <h3>By: <%= post.Author.name %></h3>
+    <% include ../partials/tagList.ejs %>
+    <p><%= post.content %></p>
+  </body>
+</html>

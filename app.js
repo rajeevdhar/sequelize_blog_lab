@@ -16,6 +16,15 @@ app.get("/posts", function (req, res) {
   });
 });
 
+app.get("/posts/:id", function (req, res) {
+  db.Post.find({
+    where: {id: req.params.id},
+    include: [db.Author, db.Tag]
+  }).done(function (err, post) {
+    res.render("posts/show.ejs", {post: post});
+  });
+});
+
 app.post("/posts", function (req, res) {
   var authorParams = req.body.author;
   var postParams = req.body.post;
